@@ -1,2 +1,2 @@
 # grammy-cli
-CLI tool for configuring and using grammy (The bot framework for telegram).
+CLI tool for configuring and using [grammy](https://grammy.dev/) (The bot framework for telegram).
