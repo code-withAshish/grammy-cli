@@ -1,4 +1,5 @@
 import { prompt, Select, Input } from "https://deno.land/x/cliffy/prompt/mod.ts";
+import dependencyCheck from "./dependencyCheck.ts"
 const initPrompt = async () => {
     const result = await prompt([
         {
@@ -13,7 +14,6 @@ const initPrompt = async () => {
                 if (await checkDirectoryexist(dirname)) {
                     return "Directory already exists";
                 }
-
                 return true;
             },
         },
@@ -21,7 +21,14 @@ const initPrompt = async () => {
             name: "runtime",
             message: "What runtime do you want to use",
             type: Select,
-            options: ["Deno", "Node.js"],
+            options: ["deno", "node"],
+            validate: async (runtime) => {
+                const check = new dependencyCheck(runtime);
+                const checkStatus = await check.checkDependencies()
+                if (!checkStatus)
+                    return `${runtime} was not found on the system`
+                return true
+            }
         },
         {
             name: "language",
@@ -29,7 +36,6 @@ const initPrompt = async () => {
             type: Select,
             options: ["Typescript", "Javascript"],
         },
-
     ]);
     return result;
 }
