@@ -26,15 +26,13 @@ class fileGenerator {
 
     async downloadFiles() {
         // path of the template files
-        const sourceDirectory = path.resolve(path.dirname(path.fromFileUrl(import.meta.url)), "template", this.runtime, this.language)
+        const sourceDirectory = path.resolve(import.meta.url, "template", this.runtime, this.language)
         //path of the user directory where files will be copied
-        const destinationDirectory = path.resolve(Deno.cwd(), this.dirname)
+        const _destinationDirectory = path.resolve(Deno.cwd(), this.dirname)
         try {
             const res = await fetch(sourceDirectory);
-            const data = await res.arrayBuffer();
-            const decoder = new TextDecoder("utf-8");
-            const text = decoder.decode(data);
-            await Deno.writeTextFile(destinationDirectory, text);
+            console.info(res);
+
             return true;
         } catch (e) {
             console.log(red(bold(`Encounter an unexpected error ${e}\n`)));
