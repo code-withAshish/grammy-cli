@@ -11,17 +11,36 @@ class fileGenerator {
         this.runtime = runtime;
     }
     async generateFiles() {
+        // path of the template files
+        const sourceDirectory = path.resolve(path.dirname(path.fromFileUrl(import.meta.url)), "template", this.runtime, this.language)
+        //path of the user directory where files will be copied
+        const destinationDirectory = path.resolve(Deno.cwd(), this.dirname)
         try {
-            // path of the template files
-            const sourceDirectory = path.resolve(path.dirname(path.fromFileUrl(import.meta.url)), "template", this.runtime, this.language)
-            //path of the user directory where files will be copied
-            const destinationDirectory = path.resolve(Deno.cwd(), this.dirname)
             await copy(sourceDirectory, destinationDirectory);
             return true;
         } catch (e) {
             console.log(red(bold(`Encounter an unexpected error ${e}\n`)));
             return false;
         }
+    }
+
+    async downloadFiles() {
+        // path of the template files
+        const sourceDirectory = path.resolve(path.dirname(path.fromFileUrl(import.meta.url)), "template", this.runtime, this.language)
+        //path of the user directory where files will be copied
+        const destinationDirectory = path.resolve(Deno.cwd(), this.dirname)
+        try {
+            const res = await fetch(sourceDirectory);
+            const data = await res.arrayBuffer();
+            const decoder = new TextDecoder("utf-8");
+            const text = decoder.decode(data);
+            await Deno.writeTextFile(destinationDirectory, text);
+            return true;
+        } catch (e) {
+            console.log(red(bold(`Encounter an unexpected error ${e}\n`)));
+            return false;
+        }
+
     }
 }
 export default fileGenerator;
