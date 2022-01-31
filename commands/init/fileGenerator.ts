@@ -24,12 +24,16 @@ class fileGenerator {
             denoArray.map((x) => {
                 if (this.language === "Typescript") {
                     x.Typescript.forEach(async (filePath) => {
-                        await scaffold(filePath, Deno.cwd());
+                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
+                        await Deno.mkdir(destinationPath)
+                        await scaffold(filePath, destinationPath);
                     })
                 }
                 if (this.language === "Javascript") {
                     x.Javascript.forEach(async (filePath) => {
-                        await scaffold(filePath, Deno.cwd());
+                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
+                        await Deno.mkdir(destinationPath)
+                        await scaffold(filePath, destinationPath);
                     })
                 }
             })
@@ -45,13 +49,17 @@ class fileGenerator {
             nodeArray.map((x) => {
                 if (this.language === "Typescript") {
                     x.Typescript.forEach(async (filePath) => {
-                        await scaffold(filePath, Deno.cwd());
+                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
+                        await Deno.mkdir(destinationPath)
+                        await scaffold(filePath, destinationPath);
                     })
                 }
                 if (this.language === "Javascript") {
 
                     x.Javascript.forEach(async (filePath) => {
-                        await scaffold(filePath, Deno.cwd());
+                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
+                        await Deno.mkdir(destinationPath)
+                        await scaffold(filePath, destinationPath);
                     })
                 }
             })
