@@ -1,44 +1,67 @@
-import * as path from "https://deno.land/std/path/mod.ts";
+import { scaffold } from "https://deno.land/x/skaffe@v1.0.0/mod.ts";
 import { red, bold } from "https://deno.land/std/fmt/colors.ts";
-import { copy } from "https://deno.land/std@0.123.0/fs/copy.ts";
+import { nodeArray, denoArray } from "./pathArray.ts"
+
 class fileGenerator {
     private dirname: string;
     private language: string;
     private runtime: string;
+
     constructor(dirname: string, language: string, runtime: string) {
         this.dirname = dirname;
         this.language = language;
         this.runtime = runtime;
     }
-    async generateFiles() {
-        // path of the template files
-        const sourceDirectory = path.resolve(path.dirname(path.fromFileUrl(import.meta.url)), "template", this.runtime, this.language)
-        //path of the user directory where files will be copied
-        const destinationDirectory = path.resolve(Deno.cwd(), this.dirname)
+    generateFiles() {
+        if (this.runtime === "deno")
+            return this.denoGenerate();
+        if (this.runtime === "node")
+            return this.nodeGenerate();
+    }
+
+    private denoGenerate(): boolean {
         try {
-            await copy(sourceDirectory, destinationDirectory);
-            return true;
+            denoArray.map((x) => {
+                if (this.language === "Typescript") {
+                    x.Typescript.forEach(async (filePath) => {
+                        await scaffold(filePath, Deno.cwd());
+                    })
+                }
+                if (this.language === "Javascript") {
+                    x.Javascript.forEach(async (filePath) => {
+                        await scaffold(filePath, Deno.cwd());
+                    })
+                }
+            })
+            return true
+        }
+        catch (e) {
+            console.log(red(bold(`Encounter an unexpected error ${e}\n`)));
+            return false;
+        }
+    }
+    private nodeGenerate(): boolean {
+        try {
+            nodeArray.map((x) => {
+                if (this.language === "Typescript") {
+                    x.Typescript.forEach(async (filePath) => {
+                        await scaffold(filePath, Deno.cwd());
+                    })
+                }
+                if (this.language === "Javascript") {
+
+                    x.Javascript.forEach(async (filePath) => {
+                        await scaffold(filePath, Deno.cwd());
+                    })
+                }
+            })
+            return true
         } catch (e) {
             console.log(red(bold(`Encounter an unexpected error ${e}\n`)));
             return false;
         }
     }
 
-    async downloadFiles() {
-        // path of the template files
-        const sourceDirectory = path.resolve(import.meta.url, "template", this.runtime, this.language)
-        //path of the user directory where files will be copied
-        const _destinationDirectory = path.resolve(Deno.cwd(), this.dirname)
-        try {
-            const res = await fetch(sourceDirectory);
-            console.info(res);
-
-            return true;
-        } catch (e) {
-            console.log(red(bold(`Encounter an unexpected error ${e}\n`)));
-            return false;
-        }
-
-    }
 }
+
 export default fileGenerator;

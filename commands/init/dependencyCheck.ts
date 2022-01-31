@@ -29,7 +29,7 @@ class dependencyCheck {
         const _rawError = await p.stderrOutput();
 
         if (code === 0) {
-            //returning true if the process is succesfull else false if fails
+            //returning true if the process is succesfull else false 
             return true;
         } else {
             return false;
