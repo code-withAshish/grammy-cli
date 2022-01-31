@@ -27,7 +27,7 @@ await new Command()
   .action(async (_opts) => {
     const res = await initPrompt();
     const fg = new fileGenerator(res.dirname!, res.language!, res.runtime!);
-    const status = fg.generateFiles();
+    const status = await fg.generateFiles();
     showLoader(status);
   }).parse(Deno.args);
 
