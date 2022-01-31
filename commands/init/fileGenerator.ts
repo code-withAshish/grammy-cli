@@ -23,15 +23,17 @@ class fileGenerator {
         try {
             denoArray.map((x) => {
                 if (this.language === "Typescript") {
-                    x.Typescript.forEach(async (filePath) => {
-                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await scaffold(filePath, destinationPath);
+                    x.Typescript.forEach(async (y) => {
+                        const destinationPath = `${Deno.cwd()}/${this.dirname}/${y.fileName}`
+                        await Deno.mkdir(destinationPath);
+                        await scaffold(y.filePath, destinationPath);
                     })
                 }
                 if (this.language === "Javascript") {
-                    x.Javascript.forEach(async (filePath) => {
-                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await scaffold(filePath, destinationPath);
+                    x.Javascript.forEach(async (y) => {
+                        const destinationPath = `${Deno.cwd()}/${this.dirname}/${y.fileName}`
+                        await Deno.mkdir(destinationPath);
+                        await scaffold(y.filePath, destinationPath);
                     })
                 }
             })
@@ -46,16 +48,17 @@ class fileGenerator {
         try {
             nodeArray.map((x) => {
                 if (this.language === "Typescript") {
-                    x.Typescript.forEach(async (filePath) => {
-                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await scaffold(filePath, destinationPath);
+                    x.Typescript.forEach(async (y) => {
+                        const destinationPath = `${Deno.cwd()}/${this.dirname}/${y.fileName}`
+                        await Deno.mkdir(destinationPath);
+                        await scaffold(y.filePath, destinationPath);
                     })
                 }
                 if (this.language === "Javascript") {
-
-                    x.Javascript.forEach(async (filePath) => {
-                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await scaffold(filePath, destinationPath);
+                    x.Javascript.forEach(async (y) => {
+                        const destinationPath = `${Deno.cwd()}/${this.dirname}/${y.fileName}`
+                        await Deno.mkdir(destinationPath);
+                        await scaffold(y.filePath, destinationPath);
                     })
                 }
             })

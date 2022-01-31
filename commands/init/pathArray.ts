@@ -5,29 +5,28 @@ const _denoPath = `${path.dirname(import.meta.url)}/template/deno`;
 
 
 const nodeArray: arrayInterface[] = [{
-  Typescript: [
-    `${nodePath}/Typescript/index.ts`,
-    `${nodePath}/Typescript/package.json`,
-    `${nodePath}/Typescript/.eslintrc.json`,
-    `${nodePath}/Typescript/.prettierrc`,
+  Typescript: [{ fileName: "index.ts", filePath: `${nodePath}/Javascript/index.js` },
+  { fileName: "package.json", filePath: `${nodePath}/Javascript/package.json` },
+  { fileName: ".prettierrc", filePath: `${nodePath}/Javascript/.prettierrc` },
+  { fileName: ".eslintrc.json", filePath: `${nodePath}/Javascript/.eslintrc.json` },
   ],
-  Javascript: [
-    `${nodePath}/Javascript/index.js`,
-    `${nodePath}/Javascript/package.json`,
-    `${nodePath}/Javascript/.prettierrc`,
-    `${nodePath}/Javascript/.eslintrc.json`]
+  Javascript: [{ fileName: "index.js", filePath: `${nodePath}/Typescript/index.js` },
+  { fileName: "package.json", filePath: `${nodePath}/Typescript/package.json` },
+  { fileName: ".prettierrc", filePath: `${nodePath}/Typescript/.prettierrc` },
+  { fileName: ".eslintrc.json", filePath: `${nodePath}/Typescript/.eslintrc.json` },
+  ]
 }]
 
 
 const denoArray: arrayInterface[] = [{
-  Typescript: [`${_denoPath}/Typescript/bot.ts`],
-  Javascript: [`${_denoPath}/Typescript/bot.js`]
+  Typescript: [{ fileName: "bot.ts", filePath: `${_denoPath}/Typescript/bot.ts` }],
+  Javascript: [{ fileName: "bot.js", filePath: `${_denoPath}/Typescript/bot.js` }]
 }]
 
 
 export interface arrayInterface {
-  Typescript: string[] | URL[],
-  Javascript: string[] | URL[]
+  Typescript: Array<{ fileName: string | URL, filePath: string | URL }>
+  Javascript: Array<{ fileName: string | URL, filePath: string | URL }>
 }
 
 
