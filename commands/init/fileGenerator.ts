@@ -25,14 +25,12 @@ class fileGenerator {
                 if (this.language === "Typescript") {
                     x.Typescript.forEach(async (filePath) => {
                         const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await Deno.mkdir(destinationPath)
                         await scaffold(filePath, destinationPath);
                     })
                 }
                 if (this.language === "Javascript") {
                     x.Javascript.forEach(async (filePath) => {
                         const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await Deno.mkdir(destinationPath)
                         await scaffold(filePath, destinationPath);
                     })
                 }
@@ -50,7 +48,6 @@ class fileGenerator {
                 if (this.language === "Typescript") {
                     x.Typescript.forEach(async (filePath) => {
                         const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await Deno.mkdir(destinationPath)
                         await scaffold(filePath, destinationPath);
                     })
                 }
@@ -58,7 +55,6 @@ class fileGenerator {
 
                     x.Javascript.forEach(async (filePath) => {
                         const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await Deno.mkdir(destinationPath)
                         await scaffold(filePath, destinationPath);
                     })
                 }
