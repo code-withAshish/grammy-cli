@@ -19,20 +19,18 @@ class fileGenerator {
             return this.nodeGenerate();
     }
 
-    private denoGenerate(): boolean {
+    private async denoGenerate() {
         try {
+            const destinationPath = `${Deno.cwd()}/${this.dirname}`
+            await Deno.mkdir(destinationPath);
             denoArray.map((x) => {
                 if (this.language === "Typescript") {
                     x.Typescript.forEach(async (y) => {
-                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await Deno.mkdir(destinationPath);
                         await scaffold(y.filePath, `${destinationPath}/${y.fileName}`);
                     })
                 }
                 if (this.language === "Javascript") {
                     x.Javascript.forEach(async (y) => {
-                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await Deno.mkdir(destinationPath);
                         await scaffold(y.filePath, `${destinationPath}/${y.fileName}`);
                     })
                 }
@@ -44,20 +42,18 @@ class fileGenerator {
             return false;
         }
     }
-    private nodeGenerate(): boolean {
+    private async nodeGenerate() {
         try {
+            const destinationPath = `${Deno.cwd()}/${this.dirname}`
+            await Deno.mkdir(destinationPath);
             nodeArray.map((x) => {
                 if (this.language === "Typescript") {
                     x.Typescript.forEach(async (y) => {
-                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await Deno.mkdir(destinationPath);
                         await scaffold(y.filePath, `${destinationPath}/${y.fileName}`);
                     })
                 }
                 if (this.language === "Javascript") {
                     x.Javascript.forEach(async (y) => {
-                        const destinationPath = `${Deno.cwd()}/${this.dirname}`
-                        await Deno.mkdir(destinationPath);
                         await scaffold(y.filePath, `${destinationPath}/${y.fileName}`);
                     })
                 }
