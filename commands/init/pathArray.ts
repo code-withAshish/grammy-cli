@@ -5,16 +5,16 @@ const _denoPath = `${path.dirname(import.meta.url)}/template/deno`;
 
 
 const nodeArray: arrayInterface[] = [{
-  Typescript: [{ fileName: "index.ts", filePath: `${nodePath}/Javascript/index.js` },
+  Typescript: [{ fileName: "index.js", filePath: `${nodePath}/Typescript/index.js` },
+  { fileName: "package.json", filePath: `${nodePath}/Typescript/package.json` },
+  { fileName: ".prettierrc", filePath: `${nodePath}/Typescript/.prettierrc` },
+  { fileName: ".eslintrc.json", filePath: `${nodePath}/Typescript/.eslintrc.json` },
+  ],
+  Javascript: [{ fileName: "index.ts", filePath: `${nodePath}/Javascript/index.js` },
   { fileName: "package.json", filePath: `${nodePath}/Javascript/package.json` },
   { fileName: ".prettierrc", filePath: `${nodePath}/Javascript/.prettierrc` },
   { fileName: ".eslintrc.json", filePath: `${nodePath}/Javascript/.eslintrc.json` },
   ],
-  Javascript: [{ fileName: "index.js", filePath: `${nodePath}/Typescript/index.js` },
-  { fileName: "package.json", filePath: `${nodePath}/Typescript/package.json` },
-  { fileName: ".prettierrc", filePath: `${nodePath}/Typescript/.prettierrc` },
-  { fileName: ".eslintrc.json", filePath: `${nodePath}/Typescript/.eslintrc.json` },
-  ]
 }]
 
 
