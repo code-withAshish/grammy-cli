@@ -1,7 +1,7 @@
-import * as path from "https://deno.land/std/path/mod.ts";
+import { dirname } from "https://deno.land/std/path/mod.ts";
 
-const nodePath = `${path.dirname(import.meta.url)}/template/node`;
-const _denoPath = `${path.dirname(import.meta.url)}/template/deno`;
+const nodePath = `${dirname(import.meta.url)}/template/node`;
+const _denoPath = `${dirname(import.meta.url)}/template/deno`;
 
 
 const nodeArray: arrayInterface[] = [{
@@ -23,10 +23,9 @@ const denoArray: arrayInterface[] = [{
   Javascript: [{ fileName: "bot.js", filePath: `${_denoPath}/Typescript/bot.js` }]
 }]
 
-
 export interface arrayInterface {
-  Typescript: Array<{ fileName: string | URL, filePath: string | URL }>
-  Javascript: Array<{ fileName: string | URL, filePath: string | URL }>
+  Typescript: Array<{ fileName: string, filePath: string | URL }>
+  Javascript: Array<{ fileName: string, filePath: string | URL }>
 }
 
 
