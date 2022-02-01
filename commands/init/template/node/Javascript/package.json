@@ -3,6 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "eslintConfig": {
+     "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended","prettier"],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+    }},
   "dependencies": {
     "grammy": "^1.6.2"
   },

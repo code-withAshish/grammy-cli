@@ -13,11 +13,11 @@ class fileGenerator {
         this.language = language;
         this.runtime = runtime;
     }
-    generateFiles() {
+    async generateFiles() {
         if (this.runtime === "deno")
-            return this.denoGenerate();
+            return await this.denoGenerate();
         if (this.runtime === "node")
-            return this.nodeGenerate();
+            return await this.nodeGenerate();
     }
 
     private async denoGenerate() {
