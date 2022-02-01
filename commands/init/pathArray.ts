@@ -1,26 +1,24 @@
-import { dirname } from "https://deno.land/std/path/mod.ts";
+import { dirname, join } from "https://deno.land/std/path/mod.ts";
 
-const nodePath = `${dirname(import.meta.url)}/template/node`;
-const _denoPath = `${dirname(import.meta.url)}/template/deno`;
-
+const denoPath = join(dirname(import.meta.url), "template", "deno");
+const nodePath = join(dirname(import.meta.url), "template", "node");
 
 const nodeArray: arrayInterface[] = [{
-  Typescript: [{ fileName: "index.js", filePath: `${nodePath}/Typescript/index.js` },
-  { fileName: "package.json", filePath: `${nodePath}/Typescript/package.json` },
-  { fileName: ".prettierrc", filePath: `${nodePath}/Typescript/.prettierrc` },
-  { fileName: ".eslintrc.json", filePath: `${nodePath}/Typescript/.eslintrc.json` },
+  Typescript: [{ fileName: "index.js", filePath: join(nodePath, "Typescript", "index.ts") },
+  { fileName: "package.json", filePath: join(nodePath, "Typescript", "package.json") },
+  { fileName: ".prettierrc", filePath: join(nodePath, "Typescript", ".prettierrc") },
+  { fileName: ".eslintrc.json", filePath: join(nodePath, "Typescript", ".eslintrc.json") },
   ],
-  Javascript: [{ fileName: "index.ts", filePath: `${nodePath}/Javascript/index.js` },
-  { fileName: "package.json", filePath: `${nodePath}/Javascript/package.json` },
-  { fileName: ".prettierrc", filePath: `${nodePath}/Javascript/.prettierrc` },
-  { fileName: ".eslintrc.json", filePath: `${nodePath}/Javascript/.eslintrc.json` },
+  Javascript: [{ fileName: "index.js", filePath: join(nodePath, "Javascript", "index.js") },
+  { fileName: "package.json", filePath: join(nodePath, "Javascript", "package.json") },
+  { fileName: ".prettierrc", filePath: join(nodePath, "Javascript", ".prettierrc") },
+  { fileName: ".eslintrc.json", filePath: join(nodePath, "Javascript", ".eslintrc.json") },
   ],
 }]
 
-
 const denoArray: arrayInterface[] = [{
-  Typescript: [{ fileName: "bot.ts", filePath: `${_denoPath}/Typescript/bot.ts` }],
-  Javascript: [{ fileName: "bot.js", filePath: `${_denoPath}/Typescript/bot.js` }]
+  Typescript: [{ fileName: "bot.ts", filePath: join(denoPath, "Typescript", "bot.ts") }],
+  Javascript: [{ fileName: "bot.js", filePath: join(denoPath, "Javascript", "bot.js") }]
 }]
 
 export interface arrayInterface {
