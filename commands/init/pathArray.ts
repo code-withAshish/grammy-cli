@@ -5,12 +5,12 @@ const nodePath = join(dirname(import.meta.url), "template", "node");
 
 const nodeArray: arrayInterface[] = [{
   Typescript: [{ fileName: "index.js", filePath: join(nodePath, "Typescript", "index.ts") },
-  { fileName: ".prettierrc", filePath: join(nodePath, "Typescript", "prettier.config.js") },
+  { fileName: "prettier.config.js", filePath: join(nodePath, "Typescript", "prettier.config.js") },
   { fileName: "package.json", filePath: join(nodePath, "Typescript", "package.json") },
   ],
   Javascript: [{ fileName: "index.js", filePath: join(nodePath, "Javascript", "index.js") },
   { fileName: "package.json", filePath: join(nodePath, "Javascript", "package.json") },
-  { fileName: ".prettierrc", filePath: join(nodePath, "Javascript", "prettierr.config.js") },
+  { fileName: "prettier.config.js", filePath: join(nodePath, "Javascript", "prettierr.config.js") },
   ],
 }]
 
