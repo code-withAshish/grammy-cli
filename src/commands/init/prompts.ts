@@ -1,6 +1,7 @@
 import { prompt, Select, Input } from "https://deno.land/x/cliffy/prompt/mod.ts";
-import dependencyCheck from "./dependencyCheck.ts"
-const initPrompt = async () => {
+
+
+const customPrompt = async () => {
     const result = await prompt([
         {
             name: "dirname",
@@ -22,13 +23,6 @@ const initPrompt = async () => {
             message: "What runtime do you want to use",
             type: Select,
             options: ["deno", "node"],
-            validate: async (runtime) => {
-                const check = new dependencyCheck(runtime);
-                const checkStatus = await check.checkDependencies()
-                if (!checkStatus)
-                    return `${runtime} was not found on the system`
-                return true
-            }
         },
         {
             name: "language",
@@ -39,6 +33,38 @@ const initPrompt = async () => {
     ]);
     return result;
 }
+const choicePrompt = async () => {
+    const result = await prompt([
+        {
+            name: "choice",
+            message: "How do you want to setup the project",
+            type: Select,
+            options: ["Default", "Custom"],
+        },
+    ]);
+    return result;
+}
+
+const defaultPrompt = async () => {
+    const result = await prompt([{
+        name: "dirname",
+        message: "What is the name of the project ",
+        type: Input,
+        validate: async (dirname) => {
+            // async function to check if directory exists
+            if (dirname === "") {
+                return "Directory name cannot be empty";
+            }
+            if (await checkDirectoryexist(dirname)) {
+                return "Directory already exists";
+            }
+            return true;
+        },
+    }]);
+    return result;
+}
+
+
 // asynchronous function to check if directory exists
 const checkDirectoryexist = async (dirname: string) => {
     try {
@@ -49,5 +75,5 @@ const checkDirectoryexist = async (dirname: string) => {
         return false;
     }
 };
-export default initPrompt;
+export { customPrompt, choicePrompt, defaultPrompt, checkDirectoryexist };
 
