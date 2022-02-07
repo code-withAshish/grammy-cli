@@ -1,7 +1,7 @@
 import { scaffold } from "https://deno.land/x/skaffe@v1.0.0/mod.ts";
 import { red, bold } from "https://deno.land/std/fmt/colors.ts";
 import { join } from "https://deno.land/std/path/mod.ts";
-import { nodeArray, denoArray } from "./pathArray.ts"
+import { nodeArray, denoArray, arrayInterface } from "./pathArray.ts"
 
 class fileGenerator {
     private dirname: string;
@@ -20,61 +20,38 @@ class fileGenerator {
         return true;
     }
     async generateCustomFiles() {
-        if (this.runtime === "deno")
-            return await this.denoGenerate();
-        if (this.runtime === "node")
-            return await this.nodeGenerate();
-    }
+        try {
+            let array: arrayInterface[] | null = null;
 
-    private async denoGenerate() {
-        try {
-            const destinationPath = join(Deno.cwd(), this.dirname)
+            if (this.runtime === "deno")
+                array = denoArray;
+            else
+                array = nodeArray;
+
+            const destinationPath = join(Deno.cwd(), this.dirname);
             await Deno.mkdir(destinationPath);
-            await Promise.all(
-                denoArray.map((x) => {
-                    if (this.language === "Typescript") {
-                        x.Typescript.flatMap(async (y) => {
-                            await scaffold(y.filePath, join(destinationPath, y.fileName));
-                        })
-                    }
-                    if (this.language === "Javascript") {
-                        x.Javascript.flatMap(async (y) => {
-                            await scaffold(y.filePath, join(destinationPath, y.fileName));
-                        })
-                    }
-                })
-            )
-            return true
-        }
-        catch (e) {
-            console.log(red(bold(`Encounter an unexpected error ${e}\n`)));
-            return false;
-        }
-    }
-    private async nodeGenerate() {
-        try {
-            const destinationPath = join(Deno.cwd(), this.dirname)
-            await Deno.mkdir(destinationPath);
-            await Promise.all(
-                nodeArray.flatMap((x) => {
-                    if (this.language === "Typescript") {
+            Promise.all(
+                array.map((x) => {
+                    if (this.language === 'Typescript') {
                         x.Typescript.map(async (y) => {
                             await scaffold(y.filePath, join(destinationPath, y.fileName));
-                        })
+                        });
                     }
-                    if (this.language === "Javascript") {
-                        x.Javascript.flatMap(async (y) => {
+                    if (this.language === 'Javascript') {
+                        x.Javascript.map(async (y) => {
                             await scaffold(y.filePath, join(destinationPath, y.fileName));
-                        })
+                        });
                     }
                 })
-            )
-            return true
+            );
+            return true;
         } catch (e) {
-            console.log(red(bold(`Encounter an unexpected error ${e}\n`)));
+            console.log(red(bold(`Encountered an unexpected error ${e}\n`)));
             return false;
         }
     }
+
+
 
 }
 

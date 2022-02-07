@@ -1,6 +1,6 @@
 import { Command, HelpCommand } from "https://deno.land/x/cliffy/mod.ts";
 import { defaultScreen, instructionScreen } from "./src/commands/init/utils.ts"
-import { choicePrompt, defaultPrompt, customPrompt } from "./commands/init/prompts.ts"
+import { choicePrompt, defaultPrompt, customPrompt } from "./src/commands/init/prompts.ts"
 import fileGenerator from "./src/commands/init/fileGenerator.ts"
 
 await new Command()
